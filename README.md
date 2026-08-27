@@ -1,29 +1,25 @@
 # YouTube Subtitle Downloader — Current Captions to TXT
 
-Download exactly the subtitle language currently displayed by YouTube as timestamped UTF-8 TXT.
+A fast, lightweight userscript for downloading the captions currently displayed by YouTube with one click.
 
-Supports manual captions, auto-generated captions, and available automatic translations. No server, no tracking, and no third-party API.
+**One click. Current captions. Timestamped TXT.**
 
-Unlike a general YouTube transcript downloader, this userscript does not guess a language or default to the first available track. The downloaded language always follows the captions currently visible in the player.
+No server, no tracking, and no third-party API. The downloaded language always follows the captions visible in the player.
 
 ## Features
 
-- Downloads only the subtitle language currently displayed by YouTube.
-- Disables the download button immediately when captions are unavailable or CC is turned off.
-- Responds to caption language changes, CC toggles, and YouTube SPA navigation.
-- Supports manual captions, automatically generated captions, and currently displayed automatic translations when their authenticated request is available.
-- Exports timestamped UTF-8 plain text without translation, summarization, or rewriting.
-- Includes AI-friendly metadata: document type, video title, channel, URL, video ID, subtitle language, subtitle type, and download time.
-- Uses a sanitized, length-limited filename containing the video title, language code, and video ID.
-- Has no dependencies, server, third-party API, analytics, or tracking.
+- One-click download of the captions currently displayed by YouTube.
+- Fast, lightweight, and event-driven, with no high-frequency polling.
+- Supports manual, auto-generated, and available translated captions.
+- Exports timestamped UTF-8 TXT with useful video and subtitle metadata.
+- Automatically follows CC state, language changes, and YouTube SPA navigation.
+- No dependencies, server, third-party API, analytics, or tracking.
 
 ## Install
 
 1. Install a userscript manager such as [Tampermonkey](https://www.tampermonkey.net/).
 2. [Install the userscript](https://raw.githubusercontent.com/johnnychendev/youtube-current-subtitle-downloader/main/youtube-current-subtitle-downloader.user.js).
 3. Confirm the installation in your userscript manager.
-
-The raw installation link will work after this repository is published on GitHub with the `main` branch.
 
 ## Usage
 
