@@ -215,23 +215,32 @@
     return !button || button.getAttribute('aria-pressed') === 'true';
   };
 
+  // Player-response tracks come first: they carry baseUrl and include auto-generated
+  // tracks, which the live tracklist omits when a video also has manual tracks.
   const getTrackList = (player) => {
-    try {
-      const liveTracks = player?.getOption?.('captions', 'tracklist');
-      if (Array.isArray(liveTracks) && liveTracks.length) return liveTracks;
-    } catch (_) {
-      // Fall through to the current player response.
-    }
     const responseTracks = getPlayerResponse(player)?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
-    return Array.isArray(responseTracks) ? responseTracks : [];
+    let liveTracks = null;
+    try {
+      liveTracks = player?.getOption?.('captions', 'tracklist');
+    } catch (_) {
+      // The player response alone is enough.
+    }
+    return [
+      ...(Array.isArray(responseTracks) ? responseTracks : []),
+      ...(Array.isArray(liveTracks) ? liveTracks : []),
+    ];
   };
+
+  // The player response uses vssId; the live player API uses vss_id.
+  const trackVssId = (track) => track.vssId || track.vss_id || '';
 
   const getTrackData = (player, currentTrack) => {
     const tracks = getTrackList(player);
+    const currentVssId = trackVssId(currentTrack);
     return tracks.find((track) =>
-      (currentTrack.vssId && track.vssId === currentTrack.vssId) ||
+      (currentVssId && trackVssId(track) === currentVssId) ||
       (currentTrack.baseUrl && track.baseUrl === currentTrack.baseUrl) ||
-      (track.languageCode === currentTrack.languageCode && track.kind === currentTrack.kind)
+      (track.languageCode === currentTrack.languageCode && (track.kind || '') === (currentTrack.kind || ''))
     ) || (currentTrack.baseUrl ? {
       baseUrl: currentTrack.baseUrl,
       languageCode: currentTrack.languageCode,
