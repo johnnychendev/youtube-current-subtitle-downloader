@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Subtitle Downloader — Current Captions to TXT
 // @namespace    https://checkoutworks.dev/userscripts
-// @version      1.0.0
+// @version      1.0.1
 // @description  Download the subtitle language currently displayed by YouTube as timestamped UTF-8 TXT. Supports manual, auto-generated, and translated captions.
 // @author       Johnny Chen
 // @homepageURL  https://github.com/johnnychendev/youtube-current-subtitle-downloader
